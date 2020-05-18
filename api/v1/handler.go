@@ -39,6 +39,11 @@ func CalcYears(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	if int(monthlyIncomeAmmount) == 0 && int(capital) == 0 {
+		ErrorJSON(w, "`monthly_income` and `capital` can't be 0 simultaneously")
+		return
+	}
+
 	var retireYear int
 	retireYearParam := r.FormValue("retire_year")
 	if retireYearParam != "" {
@@ -76,7 +81,7 @@ func CalcYears(w http.ResponseWriter, r *http.Request) {
 
 		capitalBefore := capital
 		monthsCalc := MonthsCalc{}
-		isOnRetire := year > retireYear
+		isOnRetire := retireYear != 0 && year > retireYear
 
 		for month := 1; month <= 12; month++ {
 
