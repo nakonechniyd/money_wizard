@@ -12,7 +12,6 @@ import (
 func CalcYears(w http.ResponseWriter, r *http.Request) {
 	query := mux.Vars(r)
 
-	// years, err := numbers.ParseUint8(query["years"])
 	years, err := strconv.Atoi(query["years"])
 	if err != nil {
 		ErrorJSON(w, "`years` should be set as int")
