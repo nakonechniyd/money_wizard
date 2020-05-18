@@ -18,12 +18,12 @@ func CalcYears(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var monthlyIncomeAmmount float64
-	monthlyIncomeParam := r.FormValue("monthly_income")
-	if monthlyIncomeParam != "" {
-		monthlyIncomeAmmount, err = strconv.ParseFloat(monthlyIncomeParam, 64)
+	var monthlyReplenishmentAmmount float64
+	monthlyReplenishmentParam := r.FormValue("monthly_replenishment")
+	if monthlyReplenishmentParam != "" {
+		monthlyReplenishmentAmmount, err = strconv.ParseFloat(monthlyReplenishmentParam, 64)
 		if err != nil {
-			ErrorJSON(w, "`monthly_income` should be set as float")
+			ErrorJSON(w, "`monthly_replenishment` should be set as float")
 			return
 		}
 	}
@@ -38,8 +38,8 @@ func CalcYears(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	if int(monthlyIncomeAmmount) == 0 && int(capital) == 0 {
-		ErrorJSON(w, "`monthly_income` and `capital` can't be 0 simultaneously")
+	if int(monthlyReplenishmentAmmount) == 0 && int(capital) == 0 {
+		ErrorJSON(w, "`monthly_replenishment` and `capital` can't be 0 simultaneously")
 		return
 	}
 
@@ -101,7 +101,7 @@ func CalcYears(w http.ResponseWriter, r *http.Request) {
 				// working hard:
 				// 	- apply next monthly replenishment
 				//  - no dividends at all
-				monthlyReplenishment = monthlyIncomeAmmount
+				monthlyReplenishment = monthlyReplenishmentAmmount
 				lifePassiveIncome = 0
 			}
 
@@ -114,7 +114,7 @@ func CalcYears(w http.ResponseWriter, r *http.Request) {
 				CapitalBefore:        capital,
 				MonthlyReplenishment: monthlyReplenishment,
 				PassiveIncome:        passiveIncome,
-				LifePassiveIncome:    lifePassiveIncome,
+				NetLifePassiveIncome: lifePassiveIncome,
 				NetPassiveIncome:     netPassiveIncome,
 				CapitalAfter:         newCapital,
 			})
@@ -123,13 +123,14 @@ func CalcYears(w http.ResponseWriter, r *http.Request) {
 		}
 
 		yearCalc := YearCalc{
-			Year:                  year,
-			CapitalBefore:         capitalBefore,
-			TotalMonthlyIncome:    monthsCalc.Sum("MonthlyReplenishment"),
-			TotalPassiveIncome:    monthsCalc.Sum("PassiveIncome"),
-			TotalNetPassiveIncome: monthsCalc.Sum("NetPassiveIncome"),
-			CapitalAfter:          capital,
-			MonthsCalc:            monthsCalc,
+			Year:                      year,
+			CapitalBefore:             capitalBefore,
+			TotalMonthlyReplenishment: monthsCalc.Sum("MonthlyReplenishment"),
+			TotalPassiveIncome:        monthsCalc.Sum("PassiveIncome"),
+			TotalNetLifePassiveIncome: monthsCalc.Sum("NetLifePassiveIncome"),
+			TotalNetPassiveIncome:     monthsCalc.Sum("NetPassiveIncome"),
+			CapitalAfter:              capital,
+			MonthsCalc:                monthsCalc,
 		}
 		yearsData = append(yearsData, yearCalc)
 	}

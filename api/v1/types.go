@@ -9,7 +9,7 @@ type MonthCalc struct {
 	CapitalBefore        float64 `json:"capital_before,omitempty"`
 	MonthlyReplenishment float64 `json:"monthly_replenishment,omitempty"`
 	PassiveIncome        float64 `json:"passive_income"`
-	LifePassiveIncome    float64 `json:"life_passive_income,omitempty"`
+	NetLifePassiveIncome float64 `json:"net_life_passive_income,omitempty"`
 	NetPassiveIncome     float64 `json:"net_passive_income"`
 	CapitalAfter         float64 `json:"capital_after,omitempty"`
 }
@@ -30,12 +30,13 @@ func (mc *MonthsCalc) Sum(field string) float64 {
 
 // YearCalc -
 type YearCalc struct {
-	Year                  int     `json:"year"`
-	CapitalBefore         float64 `json:"capital_before,omitempty"`
-	TotalMonthlyIncome    float64 `json:"total_monthly_income,omitempty"`
-	TotalPassiveIncome    float64 `json:"total_passive_income"`
-	TotalNetPassiveIncome float64 `json:"total_net_passive_income"`
-	CapitalAfter          float64 `json:"capital_after,omitempty"`
+	Year                      int     `json:"year"`
+	CapitalBefore             float64 `json:"capital_before,omitempty"`
+	TotalMonthlyReplenishment float64 `json:"total_monthly_replenishment,omitempty"`
+	TotalPassiveIncome        float64 `json:"total_passive_income"`
+	TotalNetLifePassiveIncome float64 `json:"total_net_life_passive_income,omitempty"`
+	TotalNetPassiveIncome     float64 `json:"total_net_passive_income"`
+	CapitalAfter              float64 `json:"capital_after,omitempty"`
 
 	// promoted field
 	MonthsCalc
