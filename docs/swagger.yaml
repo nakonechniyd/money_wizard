@@ -1,0 +1,96 @@
+basePath: /
+definitions:
+  apiv1.MonthCalc:
+    properties:
+      capital_after:
+        type: number
+      capital_before:
+        type: number
+      month:
+        type: integer
+      monthly_replenishment:
+        type: number
+      net_life_passive_income:
+        type: number
+      net_passive_income:
+        type: number
+      passive_income:
+        type: number
+      year:
+        type: integer
+    type: object
+  apiv1.YearCalc:
+    properties:
+      capital_after:
+        type: number
+      capital_before:
+        type: number
+      months:
+        items:
+          $ref: '#/definitions/apiv1.MonthCalc'
+        type: array
+      total_monthly_replenishment:
+        type: number
+      total_net_life_passive_income:
+        type: number
+      total_net_passive_income:
+        type: number
+      total_passive_income:
+        type: number
+      year:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: Simple calculation of human wealth accumulation
+  license: {}
+  title: Money Wizard API
+  version: "1.0"
+paths:
+  /api/v1/calc_years/{years}:
+    get:
+      description: Calculate human wealth by specified parameters
+      parameters:
+      - description: Ammount of calculation years
+        in: path
+        name: years
+        required: true
+        type: integer
+      - description: Total percent of all taxes
+        in: query
+        name: tax_percent
+        required: true
+        type: number
+      - description: Passive percent
+        in: query
+        name: passive_percent
+        required: true
+        type: number
+      - description: Ammount of start capital
+        in: query
+        name: capital
+        required: true
+        type: number
+      - description: Monthly replenishment
+        in: query
+        name: monthly_replenishment
+        type: number
+      - description: Retire year
+        in: query
+        name: retire_year
+        type: integer
+      - description: Life percent from net passive income
+        in: query
+        name: life_percent
+        type: number
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/apiv1.YearCalc'
+            type: array
+      summary: Calculate human wealth
+swagger: "2.0"

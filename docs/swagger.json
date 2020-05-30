@@ -1,0 +1,144 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Simple calculation of human wealth accumulation",
+        "title": "Money Wizard API",
+        "contact": {},
+        "license": {},
+        "version": "1.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/api/v1/calc_years/{years}": {
+            "get": {
+                "description": "Calculate human wealth by specified parameters",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Calculate human wealth",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Ammount of calculation years",
+                        "name": "years",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "number",
+                        "description": "Total percent of all taxes",
+                        "name": "tax_percent",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "number",
+                        "description": "Passive percent",
+                        "name": "passive_percent",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "number",
+                        "description": "Ammount of start capital",
+                        "name": "capital",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "number",
+                        "description": "Monthly replenishment",
+                        "name": "monthly_replenishment",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Retire year",
+                        "name": "retire_year",
+                        "in": "query"
+                    },
+                    {
+                        "type": "number",
+                        "description": "Life percent from net passive income",
+                        "name": "life_percent",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/apiv1.YearCalc"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "apiv1.MonthCalc": {
+            "type": "object",
+            "properties": {
+                "capital_after": {
+                    "type": "number"
+                },
+                "capital_before": {
+                    "type": "number"
+                },
+                "month": {
+                    "type": "integer"
+                },
+                "monthly_replenishment": {
+                    "type": "number"
+                },
+                "net_life_passive_income": {
+                    "type": "number"
+                },
+                "net_passive_income": {
+                    "type": "number"
+                },
+                "passive_income": {
+                    "type": "number"
+                },
+                "year": {
+                    "type": "integer"
+                }
+            }
+        },
+        "apiv1.YearCalc": {
+            "type": "object",
+            "properties": {
+                "capital_after": {
+                    "type": "number"
+                },
+                "capital_before": {
+                    "type": "number"
+                },
+                "months": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/apiv1.MonthCalc"
+                    }
+                },
+                "total_monthly_replenishment": {
+                    "type": "number"
+                },
+                "total_net_life_passive_income": {
+                    "type": "number"
+                },
+                "total_net_passive_income": {
+                    "type": "number"
+                },
+                "total_passive_income": {
+                    "type": "number"
+                },
+                "year": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

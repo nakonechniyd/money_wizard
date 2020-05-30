@@ -8,7 +8,19 @@ import (
 	"github.com/gorilla/mux"
 )
 
-// CalcYears -
+// CalcYears godoc
+// @Summary Calculate human wealth
+// @Description Calculate human wealth by specified parameters
+// @Param years path int true "Ammount of calculation years"
+// @Param tax_percent query number true "Total percent of all taxes"
+// @Param passive_percent query number true "Passive percent"
+// @Param capital query number true "Ammount of start capital"
+// @Param monthly_replenishment query number false "Monthly replenishment"
+// @Param retire_year query int false "Retire year"
+// @Param life_percent query number false "Life percent from net passive income"
+// @Produce  json
+// @Success 200 {array} YearCalc
+// @Router /api/v1/calc_years/{years} [get]
 func CalcYears(w http.ResponseWriter, r *http.Request) {
 	query := mux.Vars(r)
 
