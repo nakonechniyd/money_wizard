@@ -149,5 +149,5 @@ func CalcYears(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 
-	_ = json.NewEncoder(w).Encode(yearsData)
+	json.NewEncoder(w).Encode(yearsData)
 }
