@@ -12,5 +12,5 @@ type ErrorResponse struct {
 
 // ErrorJSON -
 func ErrorJSON(w http.ResponseWriter, msg string) {
-	json.NewEncoder(w).Encode(ErrorResponse{Error: msg})
+	_ = json.NewEncoder(w).Encode(ErrorResponse{Error: msg})
 }
