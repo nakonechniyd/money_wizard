@@ -6,6 +6,8 @@ Is a toy project that demonstrate how hard to get wealth accumulation
 
 ![Tests Across Matrix](https://github.com/nakonechniyd/money_wizard/workflows/Test%20Across%20Matrix/badge.svg)
 
+![Build and Publish Docker Image](https://github.com/nakonechniyd/money_wizard/workflows/Build%20and%20Publish%20Docker%20Image/badge.svg)
+
 ## build
 ```
 make build
