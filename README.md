@@ -8,37 +8,26 @@ Is a toy project that demonstrate how hard to get wealth accumulation
 
 ![Build and Publish Docker Image](https://github.com/nakonechniyd/money_wizard/workflows/Build%20and%20Publish%20Docker%20Image/badge.svg)
 
-## build
-```
-make build
-```
-or
-```
-o build -o money_wizard main.go
-```
 
-## run
+## Run by docker
 ```
-./money_wizard
+docker pull nakonechniyd/money_wizard
+docker container run --rm --publish 8080:8080 nakonechniyd/money_wizard:latest
 ```
-it'll start API server on localhost:8080
+it'll start API server on *localhost:8080*
 
-## calculation by swagger ui
+## Calculation by swagger ui
 open in browser
 ```
 http://localhost:8080/swaggerui/
 ```
 
-## calculation
-
-```
-make curl
-```
-or
+## Calculation by curl
 ```
 curl "http://localhost:8080/api/v1/calc_years/12?tax_percent=19.5&passive_percent=14.0&capital=10000&monthly_replenishment=5000&retire_year=10&life_percent=45.0"
 ```
-where:
+
+## Params:
 - **years** - Ammount of calculation years (*Required*) = calculate for 12 years
 - **tax_percent** - Total percent of all taxes (*Required*) = shared percent of all taxes 19.5%
 - **passive_percent** - Passive percent (*Required*) = 14.0% of interest for example deposit
