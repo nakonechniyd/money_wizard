@@ -4,6 +4,8 @@ Is a toy project that demonstrate how hard to get wealth accumulation
 
 ![Lint Go Code](https://github.com/nakonechniyd/money_wizard/workflows/Lint%20Go%20Code/badge.svg)
 
+![Tests Across Matrix](https://github.com/nakonechniyd/money_wizard/workflows/Test%20Across%20Matrix/badge.svg)
+
 ## build
 ```
 make build
