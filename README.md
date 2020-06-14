@@ -2,6 +2,8 @@
 
 Is a toy project that demonstrate how hard to get wealth accumulation
 
+![Lint Go Code](https://github.com/nakonechniyd/money_wizard/workflows/Lint%20Go%20Code/badge.svg)
+
 ## build
 ```
 make build
